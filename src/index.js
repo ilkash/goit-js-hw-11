@@ -50,7 +50,7 @@ async function onclickLoad() {
       page: page,
     });
     console.log(res);
-
+    //hg
     List.insertAdjacentHTML('beforeend', create(res));
     //console.log(res.totalHits);
 
