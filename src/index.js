@@ -14,7 +14,7 @@ const onInput = async e => {
   e.preventDefault();
   try {
     page = 1;
-    const res = await getImages({
+    const { hits: res, totalHits } = await getImages({
       q: e.target.elements.searchQuery.value,
       page: page,
     });
@@ -45,7 +45,7 @@ bth.addEventListener('click', onclickLoad);
 async function onclickLoad() {
   try {
     page++;
-    const res = await getImages({
+    const { hits: res, totalHits } = await getImages({
       q: input.value,
       page: page,
     });
@@ -54,8 +54,11 @@ async function onclickLoad() {
     List.insertAdjacentHTML('beforeend', create(res));
     //console.log(res.totalHits);
 
-    if (page * 40 >= total.totalHits) {
+    if (page * 40 >= totalHits) {
       bth.style.display = 'none';
+      Notiflix.Notify.info(
+        "We're sorry, but you've reached the end of search results."
+      );
     }
     // console.log(total.totalHits);
   } catch (error) {

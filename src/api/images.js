@@ -13,7 +13,7 @@ const pixabelApi = axios.create({
 });
 export const getImages = async params => {
   const { data } = await pixabelApi.get('', { params });
-  return data.hits;
+  return data;
 
   //.then(result => result.data.hits);
 };
