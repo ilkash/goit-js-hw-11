@@ -71,7 +71,7 @@ function create(arr) {
   //List.insertAdjacentHTML('afterbegin', a);
 }
 function createImg(item) {
-  markup = `<div class="photo-card">
+  const markup = `<div class="photo-card">
       <img src="${item.webformatURL}" alt="${item.tags}" loading="lazy" width='350' height='250' />
       <div class="info">
         <p class="info-item">
