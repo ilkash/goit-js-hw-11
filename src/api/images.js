@@ -17,9 +17,9 @@ export const getImages = async params => {
 
   //.then(result => result.data.hits);
 };
-export const getHits = async params => {
-  const { data } = await pixabelApi.get('', { params });
-  return data.totalHits;
+// export const getHits = async params => {
+//   const { data } = await pixabelApi.get('', { params });
+//   return data.totalHits;
 
-  //.then(result => result.data.hits);
-};
+//   //.then(result => result.data.hits);
+// };

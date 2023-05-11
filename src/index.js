@@ -1,5 +1,5 @@
 import { getImages } from './api/images.js';
-import { getHits } from './api/images.js';
+//import { getHits } from './api/images.js';
 import Notiflix from 'notiflix';
 const List = document.querySelector('.gallery');
 const form = document.querySelector('.search-form');
@@ -18,12 +18,12 @@ const onInput = async e => {
       q: e.target.elements.searchQuery.value,
       page: page,
     });
-    console.log(res);
-    const total = await getHits({
-      q: input.value,
-      page: page,
-    });
-    console.log(total);
+    // console.log(res);
+    // const total = await getHits({
+    //   q: input.value,
+    //   page: page,
+    // });
+    // console.log(total);
     List.insertAdjacentHTML('afterbegin', create(res));
     bth.style.display = 'block';
     if (res.length === 0) {
