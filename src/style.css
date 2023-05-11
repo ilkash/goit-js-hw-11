@@ -1,0 +1,41 @@
+.container {
+  max-width: 1600px;
+  margin: auto;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+}
+button {
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.search-form {
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: dimgray;
+}
+input {
+  border-radius: 8px;
+  height: 20px;
+}
+.info {
+  border: 1px solid gray;
+  border-top: none;
+}
+
+.load-more {
+  text-align: center;
+  margin: 10px auto;
+}
+.info-item {
+  margin-top: 0;
+  padding-top: 5px;
+}
+img {
+  display: block;
+}

@@ -1,0 +1,94 @@
+import { getImages } from './api/images.js';
+import { getHits } from './api/images.js';
+import Notiflix from 'notiflix';
+const List = document.querySelector('.gallery');
+const form = document.querySelector('.search-form');
+//const bth = document.querySelector('button');
+const bth = document.querySelector('.load-more');
+const input = document.querySelector('input');
+
+let page = 1;
+bth.style.display = 'none';
+
+const onInput = async e => {
+  e.preventDefault();
+  try {
+    page = 1;
+    const res = await getImages({
+      q: e.target.elements.searchQuery.value,
+      page: page,
+    });
+    console.log(res);
+    const total = await getHits({
+      q: input.value,
+      page: page,
+    });
+    console.log(total);
+    List.insertAdjacentHTML('afterbegin', create(res));
+    bth.style.display = 'block';
+    if (res.length === 0) {
+      Notiflix.Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+    } else {
+      Notiflix.Notify.info(`Hooray! We found ${totalHits} images.`);
+    }
+
+    //create(res);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+bth.addEventListener('click', onclickLoad);
+
+async function onclickLoad() {
+  try {
+    page++;
+    const res = await getImages({
+      q: input.value,
+      page: page,
+    });
+    console.log(res);
+
+    List.insertAdjacentHTML('beforeend', create(res));
+    //console.log(res.totalHits);
+
+    if (page * 40 >= total.totalHits) {
+      bth.style.display = 'none';
+    }
+    // console.log(total.totalHits);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+form.addEventListener('submit', onInput);
+//onInput();
+function create(arr) {
+  const a = arr.map(createImg).join('');
+  return a;
+  //List.insertAdjacentHTML('afterbegin', a);
+}
+function createImg(item) {
+  markup = `<div class="photo-card">
+      <img src="${item.webformatURL}" alt="${item.tags}" loading="lazy" width='350' height='250' />
+      <div class="info">
+        <p class="info-item">
+        Likes <b > ${item.likes}</b>
+        </p>
+        <p class="info-item">
+         Views <b > ${item.views}</b>
+        </p>
+        <p class="info-item">
+        Comments  <b > ${item.comments}</b>
+        </p>
+        <p class="info-item">
+        Downloads  <b> ${item.downloads}</b>
+        </p>
+      </div>
+    </div>
+  `;
+  //`<li><img src="${item.largeImageURL}"/></li>`;
+  return markup;
+}
