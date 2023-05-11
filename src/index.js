@@ -30,6 +30,7 @@ const onInput = async e => {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+      bth.style.display = 'none';
     } else {
       Notiflix.Notify.info(`Hooray! We found ${totalHits} images.`);
     }
